@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>dawnbreaker88</title>
+    <subtitle>This is an example description</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://not-matthias.github.io/apollo/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://not-matthias.github.io/apollo/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-08-15T00:00:00+00:00</updated>
+    <id>https://not-matthias.github.io/apollo/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The Best Windows Feature Isn&#x27;t Made by Microsoft</title>
+        <published>2025-08-15T00:00:00+00:00</published>
+        <updated>2025-08-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://not-matthias.github.io/apollo/posts/wsl/"/>
+        <id>https://not-matthias.github.io/apollo/posts/wsl/</id>
+        
+        <content type="html" xml:base="https://not-matthias.github.io/apollo/posts/wsl/">&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;&lt;strong&gt;Introduction&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Before we get to the main feature, let&#x27;s be real. If you&#x27;re familiar with setting up compilers on Windows, you know what a hassle it is. You try to set up VS Code for a new language, install a bunch of packages, and still don&#x27;t know whether it will work or not. It just ends in frustration. Sure, some may get it on the first try, but most of us don&#x27;t. For me specifically, I prefer using the keyboard more than the mouse for everything.I observed something on my college PCs they all used Linux.&lt;&#x2F;p&gt;
+&lt;p&gt;At first, the majority of people didn&#x27;t like it or felt it was weird using commands and all. For me, it was different. Instead of using a GUI application for everything, Linux aligned with my principles of minimalism. I also found it was actually quite easy to navigate the system once you got the hang of it.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-linux-advantsge&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#the-linux-advantsge&quot; aria-label=&quot;Anchor link for: the-linux-advantsge&quot;&gt;&lt;strong&gt;The linux advantsge&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;why bother with Linux? It started back in the 90s with a dude named Linus Torvalds who wanted to build his own OS for his custom PC components . He wrote the core of it the Linux kernel and from there, countless versions, or &quot;distros,&quot; spun out, like Ubuntu, Arch, Fedora, Gentoo(This thing really sucks btw) and many others.&lt;&#x2F;p&gt;
+&lt;p&gt;Fast forward to today, and Linux is the backbone for countless companies. Their internal systems, cloud servers, and development workflows often run on a Linux-based OS. The reason is simple: it’s free from the control of corporate giants like Microsoft and Apple, and its lightweight nature makes it faster for things like cloud and backend development which are so Heavy.&lt;&#x2F;p&gt;
+&lt;p&gt;For students like us, learning Linux does two things. First, it improves our understanding of how a PC really works. Second, knowing it signals that you have some real, serious knowledge about computer systems.In short it’s everywhere you don’t see. Windows dominates the visible desktop, but Linux is the skeleton of modern computing and Development&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;miro.medium.com&#x2F;v2&#x2F;resize:fit:786&#x2F;format:webp&#x2F;0*Qqqd7UsfFDPL7WXh.jpeg&quot; alt=&quot;Markdown Logo&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;how-i-discovered-wsl-the-best-feature-of-windows&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-i-discovered-wsl-the-best-feature-of-windows&quot; aria-label=&quot;Anchor link for: how-i-discovered-wsl-the-best-feature-of-windows&quot;&gt;&lt;strong&gt;How I discovered WSL - the best feature of windows&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;So, I started digging deeper into the Linux rabbit hole. At first, I thought the only way I could actually use a Linux distro was to dual-boot, which wasn&#x27;t a viable option for my laptop, so I almost gave up on the idea.&lt;&#x2F;p&gt;
+&lt;p&gt;But I was still intrigued. I kept watching videos about the different distros like the OG, Arch Linux, and its famous quote, &quot;I use Arch, btw.&quot; I was fascinated by how deeply you could customize the user experience until it felt like the system truly belonged to you.&lt;&#x2F;p&gt;
+&lt;p&gt;Then one day, out of nowhere, I was scrolling through YouTube and found a video by a YouTuber called NetworkChuck titled &quot;Linux on Windows.&quot; I thought, &quot;Okay, fine, let&#x27;s watch it.&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;BOOM. That’s when I discovered WSL, the Windows Subsystem for Linux.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;introducing-wsl-the-feature-that-changes-everything&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introducing-wsl-the-feature-that-changes-everything&quot; aria-label=&quot;Anchor link for: introducing-wsl-the-feature-that-changes-everything&quot;&gt;&lt;strong&gt;Introducing WSL: The Feature That Changes Everything&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;In simple terms, WSL (Windows Subsystem for Linux) is a feature that lets you run a real Linux kernel directly on your Windows system. It uses a built-in virtualization platform called Hyper-V to make this happen. The first version was announced in 2016 and after years of development, it officially launched, enabling developers to finally use a proper Linux environment inside Windows. This makes things way faster and easier, especially for power users.&lt;&#x2F;p&gt;
+&lt;p&gt;After I watched a tutorial, I immediately set it up on my laptop. The process was surprisingly easy, but that was just the start. I began learning about package managers (like apt), using sudo, and even writing basic bash scripts. For the first time, I felt like I was discovering what it means to be a &quot;power user.&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;The difference was incredible. I could do almost anything from the terminal. Instead of hunting for .exe files and clicking through setup wizards, I could just install software in seconds with a single command:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; class=&quot;language-bash z-code&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;z-source z-shell z-bash&quot;&gt;&lt;span class=&quot;z-meta z-function-call z-shell&quot;&gt;&lt;span class=&quot;z-variable z-function z-shell&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-shell&quot;&gt; apt install &lt;span class=&quot;z-keyword z-operator z-assignment z-redirection z-shell&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;package name&lt;span class=&quot;z-keyword z-operator z-assignment z-redirection z-shell&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I can set up compilers for new languages just with few lines for example for setting up for C compiler i can just do&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; class=&quot;language-bash z-code&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;z-source z-shell z-bash&quot;&gt;&lt;span class=&quot;z-meta z-function-call z-shell&quot;&gt;&lt;span class=&quot;z-variable z-function z-shell&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-shell&quot;&gt; apt install build-essential&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-shell z-bash&quot;&gt;&lt;span class=&quot;z-meta z-function-call z-shell&quot;&gt;&lt;span class=&quot;z-variable z-function z-shell&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-shell&quot;&gt; apt install gcc&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;That was it. I could open a file in a terminal editor like nvim, write the code, and compile it right there. I remember the real &quot;aha!&quot; moment when I needed Jupyter Notebook for a project. I dreaded the heavy Anaconda installation, but in WSL, I had it up and running on my localhost with just a few commands. It just feels so fast, and you can even write simple functions to open websites like Netflix directly from your terminal. It’s a game-changer.&lt;&#x2F;p&gt;
+&lt;p&gt;I spent many nights setting up my WSl and bash scripts now insted of opening and waiting for vscode load i can just have my terminal do everything for me with some lines&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;files.catbox.moe&#x2F;ccvcq5.png&quot; alt=&quot;Markdown Logo&quot; &#x2F;&gt;
+My WSL setup&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#conclusion&quot; aria-label=&quot;Anchor link for: conclusion&quot;&gt;&lt;strong&gt;Conclusion&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;So, my journey started with the familiar frustration of trying to set up a simple C compiler on Windows. It ended with me living in a terminal, feeling completely in control of my workflow, and building things faster than I ever thought possible. The bridge between those two worlds was WSL.&lt;&#x2F;p&gt;
+&lt;p&gt;For years, it felt like you had to make a choice: the familiar desktop experience of Windows or the raw development power of Linux. WSL changes that. You get the best of both worlds, without the headache of dual-booting or buying a separate machine.If any part of my story resonated with you the frustration with setups, the curiosity about the command line, or the desire to feel more in command of your computer then my advice is simple: give WSL a try.&lt;&#x2F;p&gt;
+&lt;p&gt;Feeling inspired to jump in? Stay tuned for my next article, where I’ll walk you through the exact steps to install WSL and set up some essential utilities to begin your own journey.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The Code You Write is a Lie</title>
+        <published>2025-07-03T00:00:00+00:00</published>
+        <updated>2022-07-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://not-matthias.github.io/apollo/posts/turing/"/>
+        <id>https://not-matthias.github.io/apollo/posts/turing/</id>
+        
+        <content type="html" xml:base="https://not-matthias.github.io/apollo/posts/turing/">&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;&lt;strong&gt;Introduction&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Imagine you&#x27;re writing your first program ever probably the OG &quot;Hello, World!&quot; that we write in every language and use to test every compiler. Many people find it magical, but behind that single line lies an entire universe of complexity. It&#x27;s not as simple as printing text deep inside the CPU, logic gates are flipping, 1s and 0s are shifting, and layers of computation are unfolding.&lt;&#x2F;p&gt;
+&lt;p&gt;In this article, we&#x27;ll explore the computation side of that &quot;Hello, World!&quot; moment. And by the end, you might just be surprised at how deep the things are.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;how-computation-started&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-computation-started&quot; aria-label=&quot;Anchor link for: how-computation-started&quot;&gt;&lt;strong&gt;How computation started&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;The idea of computation began in the human mind as a way to solve complex problems by breaking them into step-by-step instructions that lead to a solution. Eventually, humans began writing these steps down, transforming raw thought into structured logic on paper. This became the earliest form of computational reasoning.&lt;&#x2F;p&gt;
+&lt;p&gt;As we solved more problems, we started noticing patterns. Many solutions followed similar logical structures. This led to a powerful realization:
+What if we could create reusable blocks of logic, like modules, and use them to solve different problems?&lt;&#x2F;p&gt;
+&lt;p&gt;At the same time, another question emerged:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;What kinds of problems can even be broken down like this?&lt;&#x2F;em&gt;
+&lt;em&gt;And can we build a model that captures all solvable problems using these logical building blocks?&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;This is where early computation models came into play.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;DFA (Deterministic Finite Automata)&lt;&#x2F;strong&gt; and &lt;strong&gt;NFA (Non-deterministic Finite Automata)&lt;&#x2F;strong&gt; fall under the category of Finite Automata. They were designed to follow simple logical flows, essentially acting as pattern recognizers. However, they have no memory, so they can’t handle tasks that require remembering past input.&lt;&#x2F;p&gt;
+&lt;p&gt;Then came Pushdown Automata (PDA). To put it bluntly, it&#x27;s like simulating prefix or postfix logic on paper. For example, evaluating expressions like &lt;code&gt;+ 3 4 or 3 4 +&lt;&#x2F;code&gt;. To do that, you need a temporary memory space, and that&#x27;s where the stack comes in. PDAs can remember things using this limited memory, allowing them to handle more complex, nested structures like matching brackets or basic code blocks.&lt;&#x2F;p&gt;
+&lt;p&gt;After many iterations of exploring such models, in 1936, Alan Turing proposed the &lt;strong&gt;Turing Machine&lt;&#x2F;strong&gt;, a theoretical model that could simulate any computation process. It wasn’t just a theory he mathematically proved that this machine could represent the logic behind any algorithmically solvable problem.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;upload.wikimedia.org&#x2F;wikipedia&#x2F;commons&#x2F;thumb&#x2F;0&#x2F;03&#x2F;Turing_Machine_Model_Davey_2012.jpg&#x2F;330px-Turing_Machine_Model_Davey_2012.jpg&quot; alt=&quot;Markdown Logo&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;turing-machine-theoretical-blueprint-of-all-modern-computers&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#turing-machine-theoretical-blueprint-of-all-modern-computers&quot; aria-label=&quot;Anchor link for: turing-machine-theoretical-blueprint-of-all-modern-computers&quot;&gt;&lt;strong&gt;Turing Machine = Theoretical Blueprint of All Modern Computers&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Now we know the breif history of compuatation and lets see how &lt;strong&gt;Turing machine&lt;&#x2F;strong&gt; machine became a blueprint of all modern computers&lt;&#x2F;p&gt;
+&lt;p&gt;Like you saw in the above image turing machine is made up of a control unit and a infinite tape, the tape is divided into cells and have 1s and 0s on them&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The control unit which help to read the current tape symbol&lt;&#x2F;li&gt;
+&lt;li&gt;Writes a symbol on the tape&lt;&#x2F;li&gt;
+&lt;li&gt;Moves one position to the left or right&lt;&#x2F;li&gt;
+&lt;li&gt;Switches to the next state&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.trccompsci.online&#x2F;mediawiki&#x2F;images&#x2F;5&#x2F;5f&#x2F;Turingmachinetapehead.gif&quot; alt=&quot;Markdown Logo&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;A Turing machine reads a long strip of paper called the tape. This tape contains symbols such as 1s, 0s, or blank spaces. The machine reads one symbol at a time and follows a set of rules that tell it what to do based on the current symbol and its current situation, known as a state. Each rule instructs the machine to change to a new state and then take an action. The action can either be writing a new symbol on the tape or moving one step to the left or right. The machine keeps repeating this process reading a symbol, deciding what to do, writing or moving, and then continuing. However, if it reaches a point where there is no rule that matches the current symbol and state, the machine simply stops. This is called halting.&lt;&#x2F;p&gt;
+&lt;p&gt;So you might start to wonder, how does all of this actually make sense? Every programming language, at its core, runs on logic. And &lt;strong&gt;logic is governed by strict rules&lt;&#x2F;strong&gt;. When you write a set of steps or a defined procedure to solve a problem, you are applying those rules in a structured way. That set of steps is called an algorithm. It is not just a bunch of random instructions. It is a rule-based method that ensures the program behaves in a predictable and logical way.&lt;&#x2F;p&gt;
+&lt;p&gt;so still how does turing machine still make sense as a machine? we can actually map the parts of turing machine to modern computers making it equivalent blueprint of modern computers&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;strong&gt;Turing Machine Part&lt;&#x2F;strong&gt;&lt;&#x2F;th&gt;&lt;th&gt;&lt;strong&gt;Modern Computer Equivalent&lt;&#x2F;strong&gt;&lt;&#x2F;th&gt;&lt;th&gt;&lt;strong&gt;Explanation&lt;&#x2F;strong&gt;&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Tape (infinite in both directions)&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;strong&gt;RAM or storage (finite memory)&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;The Turing Machine uses a tape to read and write data. Computers use memory (like RAM or hard drives) to store and update information.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Head (reads and writes one cell at a time)&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;strong&gt;CPU read and write operations&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;The Turing Machine&#x27;s head moves left or right, reading and writing one symbol at a time. The CPU reads and writes to memory in a similar step-by-step manner.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Symbols on the tape&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;strong&gt;Bits, bytes, or instructions&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;The Turing Machine works with simple symbols like 0, 1, or blank. Modern computers use binary, machine code, and characters to represent and process data.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;States&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;strong&gt;Program counter or execution state&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;The Turing Machine changes states based on input. Computers keep track of what to do next using a program counter and execution state.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Transition function&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;strong&gt;Program logic (like if, while, or switch)&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;The Turing Machine uses rules that say what to do in each situation. In programming, this is like writing conditional logic to control program flow.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Halting&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;strong&gt;Program termination&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;When a Turing Machine halts, it stops working. This is like when a computer program finishes and exits.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Input on tape&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;strong&gt;User input, command-line arguments, or files&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Turing Machines take input from the tape. Computers take input from keyboards, files, or other sources.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h1 id=&quot;how-it-s-all-connected&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-it-s-all-connected&quot; aria-label=&quot;Anchor link for: how-it-s-all-connected&quot;&gt;How it&#x27;s all connected&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;As a exaple we discussed how a simple hello world program is actually having lot of things going behind now we know brief about computation lets see how it actually connected by stripping each layer of abstratction&lt;&#x2F;p&gt;
+&lt;p&gt;basically every programming langauges is based on one another many of know C++ is improved version of C but how does C exist in the first place ? its like pulling all layers of onion to the core of bulb and at core of bulb of every programmimg language is the OG &lt;strong&gt;Assembly&lt;&#x2F;strong&gt; and assembly is just simplifed version of machine code (which is just 1s and 0s) So, our beloved C language is forst written in assembly and then bootstraped by C itself thik it of like v1 of C is written in assembly and v2 is written with assembly and v1 C so in that way C is a bootstraped language and other languges like python and java are written in C and then bootstraped&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-a-programming-language-exist-in-first-place&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-a-programming-language-exist-in-first-place&quot; aria-label=&quot;Anchor link for: how-a-programming-language-exist-in-first-place&quot;&gt;How a programming language exist in first place ?&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Now that we understand how programming languages came into existence, let’s take a closer look at what really happens when we write a simple program like printing &quot;Hello, World&quot;. When you use a function like &lt;code&gt;printf()&lt;&#x2F;code&gt;, it may look simple on the surface, but behind the scenes, it follows a defined set of instructions written in a lower-level language like C. These instructions are eventually translated into assembly language, which is closer to how the computer actually works. From there, an assembler turns that into machine code, which the CPU executes directly. That entire chain of logic is what makes the words &quot;Hello, World&quot; appear on your screen. It all starts from your code but passes through multiple layers of logic before it reaches the hardware.&lt;&#x2F;p&gt;
+&lt;p&gt;So let&#x27;s zoom out a bit and connect above logic to Turing machine which inturns make the Hello world the Turing computable problem&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-it-s-connected&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-it-s-connected&quot; aria-label=&quot;Anchor link for: how-it-s-connected&quot;&gt;How it&#x27;s connected&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You write printf(&quot;Hello, World&quot;) in a high-level language like C&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Input is placed on the Turing Machine tape&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The compiler reads this code and translates it into lower-level instructions&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Turing Machine begins in a start state and starts scanning the tape&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;These instructions are converted into assembly language&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The machine moves through defined states based on symbols it reads&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The assembler takes the assembly code and produces machine code&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Turing Machine writes new symbols on the tape and changes states accordingly&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The CPU fetches and executes the machine code&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The machine continues processing until no more rules apply&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;When execution is done and &quot;Hello, World&quot; appears on screen&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Turing Machine halts after completing the computation&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;unsolvable&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#unsolvable&quot; aria-label=&quot;Anchor link for: unsolvable&quot;&gt;Unsolvable&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Turing non-computable problems are problems for which no algorithm can solve all possible cases. A classic example is the Busy Beaver problem, which asks for the maximum number of steps a Turing machine of a given size can take before halting. Although some small cases have been solved through decades of effort, the general problem is uncomputable. This means no computer, no matter how powerful, can solve it for all inputs. In real-world terms, these problems resemble programs that loop forever with no predictable end, but not all infinite loops are uncomputable only those proven to have no general solution fall into this category.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#conclusion&quot; aria-label=&quot;Anchor link for: conclusion&quot;&gt;Conclusion&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;With every breakthrough in the field of computation, we see new limits of computation defined. Even the current AI is based on Turing principles. At the core, AI is just a big prediction machine, and everything we see is related to computation or feels like a simulation when you observe the world more deeply. The only things that aren’t based on Turing are living beings humans because we act upon emotions and are not governed strictly by a set of rules. When something like that is achieved by AI, it becomes what we call AGI.&lt;&#x2F;p&gt;
+&lt;p&gt;And next time you write a piece of code, remember it is not magic, but the result of layers of abstraction hidden beneath all the way down to 1s and 0s, governed by rules.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
