@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>dawnbreaker88</title>
     <subtitle>This is an example description</subtitle>
-    <link rel="self" type="application/atom+xml" href="https://not-matthias.github.io/apollo/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://not-matthias.github.io/apollo/"/>
+    <link rel="self" type="application/atom+xml" href="https://dawnbreaker88.github.io/blog/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://dawnbreaker88.github.io/blog/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2025-08-15T00:00:00+00:00</updated>
-    <id>https://not-matthias.github.io/apollo/atom.xml</id>
+    <id>https://dawnbreaker88.github.io/blog/atom.xml</id>
     <entry xml:lang="en">
         <title>The Best Windows Feature Isn&#x27;t Made by Microsoft</title>
         <published>2025-08-15T00:00:00+00:00</published>
@@ -20,10 +20,10 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://not-matthias.github.io/apollo/posts/wsl/"/>
-        <id>https://not-matthias.github.io/apollo/posts/wsl/</id>
+        <link rel="alternate" type="text/html" href="https://dawnbreaker88.github.io/blog/posts/wsl/"/>
+        <id>https://dawnbreaker88.github.io/blog/posts/wsl/</id>
         
-        <content type="html" xml:base="https://not-matthias.github.io/apollo/posts/wsl/">&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;&lt;strong&gt;Introduction&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+        <content type="html" xml:base="https://dawnbreaker88.github.io/blog/posts/wsl/">&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;&lt;strong&gt;Introduction&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
 &lt;p&gt;Before we get to the main feature, let&#x27;s be real. If you&#x27;re familiar with setting up compilers on Windows, you know what a hassle it is. You try to set up VS Code for a new language, install a bunch of packages, and still don&#x27;t know whether it will work or not. It just ends in frustration. Sure, some may get it on the first try, but most of us don&#x27;t. For me specifically, I prefer using the keyboard more than the mouse for everything.I observed something on my college PCs they all used Linux.&lt;&#x2F;p&gt;
 &lt;p&gt;At first, the majority of people didn&#x27;t like it or felt it was weird using commands and all. For me, it was different. Instead of using a GUI application for everything, Linux aligned with my principles of minimalism. I also found it was actually quite easy to navigate the system once you got the hang of it.&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;the-linux-advantsge&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#the-linux-advantsge&quot; aria-label=&quot;Anchor link for: the-linux-advantsge&quot;&gt;&lt;strong&gt;The linux advantsge&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
@@ -70,10 +70,10 @@ My WSL setup&lt;&#x2F;p&gt;
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://not-matthias.github.io/apollo/posts/turing/"/>
-        <id>https://not-matthias.github.io/apollo/posts/turing/</id>
+        <link rel="alternate" type="text/html" href="https://dawnbreaker88.github.io/blog/posts/turing/"/>
+        <id>https://dawnbreaker88.github.io/blog/posts/turing/</id>
         
-        <content type="html" xml:base="https://not-matthias.github.io/apollo/posts/turing/">&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;&lt;strong&gt;Introduction&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+        <content type="html" xml:base="https://dawnbreaker88.github.io/blog/posts/turing/">&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;&lt;strong&gt;Introduction&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
 &lt;p&gt;Imagine you&#x27;re writing your first program ever probably the OG &quot;Hello, World!&quot; that we write in every language and use to test every compiler. Many people find it magical, but behind that single line lies an entire universe of complexity. It&#x27;s not as simple as printing text deep inside the CPU, logic gates are flipping, 1s and 0s are shifting, and layers of computation are unfolding.&lt;&#x2F;p&gt;
 &lt;p&gt;In this article, we&#x27;ll explore the computation side of that &quot;Hello, World!&quot; moment. And by the end, you might just be surprised at how deep the things are.&lt;&#x2F;p&gt;
 &lt;h1 id=&quot;how-computation-started&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-computation-started&quot; aria-label=&quot;Anchor link for: how-computation-started&quot;&gt;&lt;strong&gt;How computation started&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
