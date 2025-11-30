@@ -17,6 +17,10 @@
         <lastmod>2022-07-03</lastmod>
     </url>
     <url>
+        <loc>https://not-matthias.github.io/apollo/posts/virtual/</loc>
+        <lastmod>2025-11-28</lastmod>
+    </url>
+    <url>
         <loc>https://not-matthias.github.io/apollo/posts/wsl/</loc>
         <lastmod>2025-08-15</lastmod>
     </url>
@@ -40,5 +44,11 @@
     </url>
     <url>
         <loc>https://not-matthias.github.io/apollo/tags/linux/</loc>
+    </url>
+    <url>
+        <loc>https://not-matthias.github.io/apollo/tags/llms/</loc>
+    </url>
+    <url>
+        <loc>https://not-matthias.github.io/apollo/tags/ml/</loc>
     </url>
 </urlset>
