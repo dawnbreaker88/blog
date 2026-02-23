@@ -5,8 +5,299 @@
     <link rel="self" type="application/atom+xml" href="https://dawnbreaker88.github.io/blog/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://dawnbreaker88.github.io/blog/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2025-11-28T00:00:00+00:00</updated>
+    <updated>2026-02-14T00:00:00+00:00</updated>
     <id>https://dawnbreaker88.github.io/blog/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Linear Regression from Scartch</title>
+        <published>2026-02-14T00:00:00+00:00</published>
+        <updated>2022-07-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://dawnbreaker88.github.io/blog/posts/linear/"/>
+        <id>https://dawnbreaker88.github.io/blog/posts/linear/</id>
+        
+        <content type="html" xml:base="https://dawnbreaker88.github.io/blog/posts/linear/">&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;Introduction&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;strong&gt;Linear Regression&lt;&#x2F;strong&gt; is often the first algorithm we encounter in our Machine Learning journey. On a &lt;strong&gt;surface level&lt;&#x2F;strong&gt;, it’s deceptively simple: it’s just a line passing through some data points. Most people look at the classic slope formula $y = mx + c$ we learn in school&lt;&#x2F;p&gt;
+&lt;p&gt;If you peel back the skin, what looks like a simple line is actually the result of solving an optimization problem. Behind this ‘simple’ line lies elegant calculus, linear algebra, and statistics. To truly understand how a machine &quot;learns&quot; this line, we have to look at it through two distinct lenses:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The Closed-Form Solution (OLS):&lt;&#x2F;strong&gt; The &quot;one-shot&quot; mathematical approach using the Normal Equation&#x2F;&lt;strong&gt;closed-form derivation from calculus&lt;&#x2F;strong&gt;,&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;The Iterative Optimization (Gradient Descent):&lt;&#x2F;strong&gt; The foundation of how almost all modern neural networks actually learn.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;So in this blog we will cover what is linear regression and the Closed from solution which is easy to understand&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;so-what-is-linear-regression&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#so-what-is-linear-regression&quot; aria-label=&quot;Anchor link for: so-what-is-linear-regression&quot;&gt;So what is Linear Regression ??&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Linear Regression is both a supervised learning algorithm and a statistical technique used to model the relationship between a continuous dependent variable and one or more independent variables by fitting a straight line.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;files.catbox.moe&#x2F;qcx8f3.png&quot; alt=&quot;lr&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;In simple terms, it finds the line that best represents the scattered data points and then uses that line to predict unknown values. But the phrase ‘best represents’ requires a mathematical definition.&lt;&#x2F;p&gt;
+&lt;p&gt;But how do we know which line is truly the best for a given dataset?&lt;br &#x2F;&gt;
+A machine cannot rely on intuition it needs precise mathematical guidance.&lt;&#x2F;p&gt;
+&lt;p&gt;Humans may judge visually, but machines require measurable criteria. A machine cannot rely on intuition; it must rely on mathematics. Therefore, we must convert this intuition into a mathematical objective.&lt;&#x2F;p&gt;
+&lt;p&gt;This measurable difference is what we call error. By defining error explicitly, we transform the problem into an optimization task.&lt;&#x2F;p&gt;
+&lt;p&gt;This idea leads us to the concept of &lt;strong&gt;error&lt;&#x2F;strong&gt; and the &lt;strong&gt;optimization&lt;&#x2F;strong&gt; process that lies at the heart of linear regression.&lt;&#x2F;p&gt;
+&lt;p&gt;So now we have a question&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;How does a machine compute the best possible line in one step?&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The answer lies in solving the optimization problem analytically. This is where the closed-form solution emerges. By minimizing the defined loss function, we can directly compute the optimal parameters.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;files.catbox.moe&#x2F;cdicbp.png&quot; alt=&quot;ways&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;So we will discuss about closed form solution by minimizing loss function&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;formulating-the-loss-function&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#formulating-the-loss-function&quot; aria-label=&quot;Anchor link for: formulating-the-loss-function&quot;&gt;Formulating the Loss Function&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Now we move from intuition to mathematics.&lt;br &#x2F;&gt;
+Let us assume we are given a dataset consisting of $n$ data points:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;When we fit a linear model to this dataset, we obtain a regression line of the form :&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\boxed{\hat{y} = mx_{i}+c}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;However, this line does not perfectly pass through every data point. The predicted values generally deviate from the actual values. This deviation is what we call the &lt;strong&gt;error&lt;&#x2F;strong&gt; (or residual), and it plays a crucial role in optimizing the model.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;files.catbox.moe&#x2F;s0z9pi.png&quot; alt=&quot;jjj&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;From the visual representation, we can define the error for each data point as:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+e_i = y_i - \hat{y}_i
+$$
+where,
+$y_i - Actual$
+$\hat{y}_i - Predicted$&lt;&#x2F;p&gt;
+&lt;p&gt;To measure the total error made by the regression line, we square each residual and sum them across all data points. This gives us the &lt;strong&gt;error function&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+E = \sum_{i=1}^{n} e_{i}^{2}
+$$&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[NOTE]
+We square the function because to remove the negative values form the error we can&#x27;t use mod because Mod function is not differentiable&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;we can call E as error function of given linear regression line&lt;&#x2F;p&gt;
+&lt;p&gt;Substituting the definition of $e_{i}$ , we get:
+$$
+E = \sum_{i=1}^{n} (y_i - \hat{y}_i)^{2}
+$$
+we can write rewrite the above error function as function of two variables m and c such as&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+E(m,c) = \sum_{i=1}^{n} (y_i - m x_{i} - c)^{2}
+$$
+since ${\hat{y} = mx_{i}+c}$&lt;&#x2F;p&gt;
+&lt;p&gt;Now the error function is expressed entirely in terms of the parameters mmm and ccc.&lt;&#x2F;p&gt;
+&lt;p&gt;Our objective is to find the values of &lt;em&gt;m&lt;&#x2F;em&gt;  and &lt;em&gt;c&lt;&#x2F;em&gt; that minimize this function.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;understanding-the-error-function-geometrically&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#understanding-the-error-function-geometrically&quot; aria-label=&quot;Anchor link for: understanding-the-error-function-geometrically&quot;&gt;Understanding the Error Function Geometrically&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Before finding the optimal solution for our model, it is important to understand how the error function behaves with respect to the parameters $m$ and $c$.&lt;&#x2F;p&gt;
+&lt;p&gt;In machine learning, the error function plays a central role because it tells us how good or bad our model is for a given set of parameters. Optimization is not magic  it is simply the process of adjusting parameters to reduce this error. Therefore, without understanding how the error function behaves, we cannot truly understand how the model reaches its optimal solution.&lt;&#x2F;p&gt;
+&lt;p&gt;Recall that our error function is:
+$$
+E(m,c) = \sum_{i=1}^{n} (y_i - m x_{i} - c)^{2}
+$$
+This function does not depend on the data alone it depends on the parameters $m$ and $c$.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;case-1-error-as-a-function-of-one-variable-fix-c&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#case-1-error-as-a-function-of-one-variable-fix-c&quot; aria-label=&quot;Anchor link for: case-1-error-as-a-function-of-one-variable-fix-c&quot;&gt;Case 1: Error as a Function of One Variable (Fix c)&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;To simplify understanding, assume for a moment that ccc is fixed.&lt;&#x2F;p&gt;
+&lt;p&gt;Then:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+E(m) = \sum_{i=1}^{n} (y_i - m x_{i} - c)^{2}
+$$
+Now the error depends only on $m$&lt;&#x2F;p&gt;
+&lt;p&gt;Notice that each term in the summation is squared.&lt;br &#x2F;&gt;
+If we expand the expression inside the square, it becomes a quadratic function in mmm. Since the sum of quadratic functions is still quadratic, the overall error function is quadratic in mmm.&lt;&#x2F;p&gt;
+&lt;p&gt;And what does a quadratic function look like?&lt;&#x2F;p&gt;
+&lt;p&gt;A &lt;strong&gt;parabola&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;When plotted with respect to $m$, the error function forms a U-shaped curve (parabola).&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;files.catbox.moe&#x2F;cl3d2x.png&quot; alt=&quot;qwert&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Because the squared term ensures positivity, the parabola opens upward. This means:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;There exists a single minimum point.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;There are no multiple local minima.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Therefore, our objective is to find the value of mmm that corresponds to the lowest point of this curve.&lt;&#x2F;p&gt;
+&lt;p&gt;For now, we aim to reach this minimum in a single analytical step .To locate this minimum precisely, we turn to calculus.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;case-2-error-as-function-of-both-m-and-c&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#case-2-error-as-function-of-both-m-and-c&quot; aria-label=&quot;Anchor link for: case-2-error-as-function-of-both-m-and-c&quot;&gt;Case 2: Error as Function of Both m and c&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Now lets see how the error function would look like if you consider whole error function&lt;&#x2F;p&gt;
+&lt;p&gt;we have:
+$$
+E(m,c) = \sum_{i=1}^{n} (y_i - m x_{i} - c)^{2}
+$$
+This is a Quadratic function in $m$ and $c$&lt;&#x2F;p&gt;
+&lt;p&gt;When you plot this in 3D:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;x-axis → m&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;y-axis → c&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;z-axis → error&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;You get a &lt;strong&gt;convex bowl-shaped surface&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;files.catbox.moe&#x2F;09y1ta.jpg&quot; alt=&quot;asdf&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;It have only one global minimum and no local minima and also the surface of graph is smooth and differentiable&lt;&#x2F;p&gt;
+&lt;p&gt;Since the error surface is convex and smooth, the minimum can be found by identifying the point where the slope becomes zero in all directions. This is precisely what calculus allows us to do.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[NOTE]
+In this article, we obtain the minimum analytically using the closed-form (OLS) solution. Although we do not explicitly “walk” on this surface, this geometric interpretation becomes especially useful when studying Gradient Descent, where the algorithm iteratively moves toward the minimum along this convex surface.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h1 id=&quot;minimizing-the-loss-using-calculus&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#minimizing-the-loss-using-calculus&quot; aria-label=&quot;Anchor link for: minimizing-the-loss-using-calculus&quot;&gt;Minimizing the Loss Using Calculus&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;To minimize the loss function, we compute the partial derivatives of $E(m,c)$ with respect to $m$ and $c$ and set them equal to zero.&lt;&#x2F;p&gt;
+&lt;p&gt;We have:
+$$
+E(m,c) = \sum_{i=1}^{n} (y_i - m x_{i} - c)^{2}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Let&#x27;s differentiate partially by setting up derivatives:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\frac{\partial E}{\partial m} = 0,\frac{\partial E}{\partial c} = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Partial derivative with respect to  c:
+$$
+\frac{\partial E}{\partial c}
+= \sum_{i=1}^{n} 2 (y_i - m x_i - c)(-1)
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\frac{\partial E}{\partial c}
+= -2 \sum_{i=1}^{n} (y_i - m x_i - c)
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Set equal to zero:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+-2\sum_{i=1}^{n} x_i (y_i - m x_i - c) = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Divide by -2:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\sum_{i=1}^{n} x_i (y_i - m x_i - c) = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Expand:
+$$
+\sum_{i=1}^{n} y_i- m \sum_{i=1}^{n} x_i-\sum_{i=1}^{n} c = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Solve for  c:
+$$
+nc = \sum_{i=1}^{n} y_i - m \sum_{i=1}^{n} x_i
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+c = \frac{1}{n}\sum_{i=1}^{n} y_i- m \frac{1}{n}\sum_{i=1}^{n} x_i
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Recognize the means:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i,
+\qquad
+\bar{y} = \frac{1}{n}\sum_{i=1}^{n} y_i
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\boxed{c = \bar{y} - m\bar{x}}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Partial derivative with respect to  m:
+$$
+\begin{align}
+\frac{\partial E}{\partial m}
+&amp;amp;= \sum_{i=1}^{n} 2 (y_i - m x_i - c)(-x_i) \
+&amp;amp;= -2 \sum_{i=1}^{n} x_i (y_i - m x_i - c)
+\end{align}
+$$
+Set equal to zero:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+-2\sum_{i=1}^{n} x_i (y_i - m x_i - c) = 0
+$$
+Divide by -2:
+$$
+\sum_{i=1}^{n} x_i (y_i - m x_i - c) = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Expand:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\sum_{i=1}^{n} x_i y_i- m \sum_{i=1}^{n} x_i^2- c \sum_{i=1}^{n} x_i = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Substitute:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\boxed{c = \bar{y} - m\bar{x}}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\sum_{i=1}^{n} x_i y_i - m \sum_{i=1}^{n}  x_i^2 - (\bar{y} - m\bar{x}) \sum_{i=1}^{n} x_i = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Expand:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\sum_{i=1}^{n} x_i y_i - m \sum_{i=1}^{n}  x_i^2 - \bar{y} \sum_{i=1}^{n}  x_i + m\bar{x} \sum_{i=1}^{n}  x_i = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;We have:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\sum_{i=1}^{n}  {x}_i = n\bar{x}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Therefore:
+$$
+\sum_{i=1}^{n} x_i y_i - m \sum_{i=1}^{n} x_i^2 - n\bar{x}\bar{y} + mn\bar{x}^2 = 0
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Rearrange terms involving $m$:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y}=m\left( x_i^2 - n\bar{x}^2\right)
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;solve for $m$:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+m = \frac{\sum x_i y_i - n\bar{x}\bar{y}}{\sum x_i^2 - n\bar{x}^2}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\sum (x_i - \bar{x})(y_i - \bar{y})=\sum x_i y_i - n\bar{x}\bar{y}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Therefore:
+$$
+\boxed{m =\frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Final Closed-Form Solution:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\boxed{m =\frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\boxed{c = \bar{y} - m\bar{x}}
+$$&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;bonus-linearregression-implementataion-from-scartch&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#bonus-linearregression-implementataion-from-scartch&quot; aria-label=&quot;Anchor link for: bonus-linearregression-implementataion-from-scartch&quot;&gt;Bonus:LinearRegression Implementataion from Scartch:&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Below is a minimal implementation of linear regression using the derived closed-form formulas.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;Python&quot; class=&quot;language-Python z-code&quot;&gt;&lt;code class=&quot;language-Python&quot; data-lang=&quot;Python&quot;&gt;&lt;span class=&quot;z-source z-python&quot;&gt;&lt;span class=&quot;z-meta z-class z-python&quot;&gt;&lt;span class=&quot;z-storage z-type z-class z-python&quot;&gt;&lt;span class=&quot;z-keyword z-declaration z-class z-python&quot;&gt;class&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-entity z-name z-class z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;Linearregression&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-class z-begin z-python&quot;&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;&lt;span class=&quot;z-meta z-function z-python&quot;&gt;    &lt;span class=&quot;z-storage z-type z-function z-python&quot;&gt;&lt;span class=&quot;z-keyword z-declaration z-function z-python&quot;&gt;def&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-entity z-name z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;_init_&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-parameters z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-parameters z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-parameters z-python&quot;&gt;&lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-parameters z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-function z-begin z-python&quot;&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;m&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;m&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;b&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;b&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;&lt;span class=&quot;z-meta z-function z-python&quot;&gt;    &lt;span class=&quot;z-storage z-type z-function z-python&quot;&gt;&lt;span class=&quot;z-keyword z-declaration z-function z-python&quot;&gt;def&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-entity z-name z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;fit&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-parameters z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-parameters z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-parameters z-python&quot;&gt;&lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-parameters z-python&quot;&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-parameters z-python&quot;&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;y_train&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-parameters z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-function z-begin z-python&quot;&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;num&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-constant z-numeric z-integer z-decimal z-python&quot;&gt;0&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;den&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-constant z-numeric z-integer z-decimal z-python&quot;&gt;0&lt;&#x2F;span&gt;        
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-statement z-loop z-for z-python&quot;&gt;&lt;span class=&quot;z-keyword z-control z-loop z-for z-python&quot;&gt;for&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;i&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-control z-loop z-for z-in z-python&quot;&gt;in&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-statement z-loop z-for z-python&quot;&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-support z-function z-builtin z-python&quot;&gt;range&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;shape&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-begin z-python&quot;&gt;[&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-arguments z-python&quot;&gt;&lt;span class=&quot;z-constant z-numeric z-integer z-decimal z-python&quot;&gt;0&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-end z-python&quot;&gt;]&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-statement z-loop z-for z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-block z-loop z-for z-python&quot;&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;            
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;            &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;num&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;num&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;+&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-group z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-group z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-begin z-python&quot;&gt;[&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-arguments z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;i&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-end z-python&quot;&gt;]&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;-&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;mean&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-group z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;y_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-begin z-python&quot;&gt;[&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-arguments z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;i&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-end z-python&quot;&gt;]&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;-&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;y_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;mean&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;            &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;den&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;den&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;+&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-group z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-group z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-begin z-python&quot;&gt;[&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-arguments z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;i&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-end z-python&quot;&gt;]&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;-&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;mean&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-group z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-begin z-python&quot;&gt;[&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-arguments z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;i&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-item-access z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-brackets z-end z-python&quot;&gt;]&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;-&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;mean&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;m&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;num&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;den&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;b&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;y_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;mean&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;-&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-group z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;m&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;*&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_train&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;mean&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-support z-function z-builtin z-python&quot;&gt;print&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;m&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-support z-function z-builtin z-python&quot;&gt;print&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;b&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;  
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;&lt;span class=&quot;z-meta z-function z-python&quot;&gt;    &lt;span class=&quot;z-storage z-type z-function z-python&quot;&gt;&lt;span class=&quot;z-keyword z-declaration z-function z-python&quot;&gt;def&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-entity z-name z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;predict&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-parameters z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-parameters z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-parameters z-python&quot;&gt;&lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-parameters z-python&quot;&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;x_test&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-parameters z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-function z-begin z-python&quot;&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-support z-function z-builtin z-python&quot;&gt;print&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_test&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-source z-python&quot;&gt;        &lt;span class=&quot;z-keyword z-control z-flow z-return z-python&quot;&gt;return&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;m&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;*&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;x_test&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-arithmetic z-python&quot;&gt;+&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;b&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#conclusion&quot; aria-label=&quot;Anchor link for: conclusion&quot;&gt;Conclusion&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;What began as a simple straight-line equation turned out to be a structured optimization problem. By defining a loss function and minimizing it using calculus, we derived the exact closed-form expressions for the slope and intercept of the regression line.&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\boxed{m =\frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\boxed{c = \bar{y} - m\bar{x}}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;This result reveals something deeper: the slope is essentially the ratio of covariance to variance. In other words, linear regression measures how strongly two variables move together relative to how much one of them varies.&lt;&#x2F;p&gt;
+&lt;p&gt;However, solving the optimization problem analytically works efficiently only in simpler settings. As the number of features increases, computing a direct closed-form solution becomes computationally expensive.&lt;&#x2F;p&gt;
+&lt;p&gt;Instead of solving the problem in one exact step, we can approach the minimum gradually.&lt;&#x2F;p&gt;
+&lt;p&gt;In the next article, we will explore &lt;strong&gt;Gradient Descent&lt;&#x2F;strong&gt; the iterative optimization algorithm that moves step by step along the same convex error surface to reach the minimum.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
     <entry xml:lang="en">
         <title>How GPUs Accidentally Created Modern Intelligence</title>
         <published>2025-11-28T00:00:00+00:00</published>
